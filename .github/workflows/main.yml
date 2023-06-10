@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -29,8 +29,21 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: See folder structure
-        run: ls -la
-      
+      - name: Test
+        run: ./gradlew test
+
+  build:
+    needs: test
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: cicd_basics/java-demo-app
+    steps:
+      - name: Checkout project sources
+        uses: actions/checkout@v2
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
       - name: Run build with Gradle Wrapper
         run: ./gradlew build
