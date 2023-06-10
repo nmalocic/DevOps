@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: cicd_basics
+        working-directory: cicd_basics/java-demo-app
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v2
